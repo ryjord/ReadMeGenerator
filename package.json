@@ -1,0 +1,19 @@
+{
+  "name": "generatorreadme",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chalk": "^5.5.0",
+    "language-detect": "^1.1.0"
+  },
+  "bin": {
+    "readme-gen": "./index.js"
+  }
+}
