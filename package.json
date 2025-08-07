@@ -13,7 +13,9 @@
     "chalk": "^5.5.0",
     "inquirer": "^12.9.0",
     "language-detect": "^1.1.0",
-    "license-checker": "^25.0.1"
+    "license-checker": "^25.0.1",
+    "simple-git": "^3.28.0",
+    "uuid": "^11.1.0"
   },
   "bin": {
     "readme-gen": "./index.js"
