@@ -53,10 +53,23 @@ pie
 > _Note: `inquirer` and `simple-git` are planned for future versions to add interactive setup and Git detection._
 
 ## 📦 Installation
+
+### Install via npm (recommended)
 ```bash
-git clone https://github.com/xmrenigmax/readme-generator-cli.git
-cd readme-gen
+npm install -g readme-generator-cli
+```
+
+### Or clone and run from source
+```bash
+git clone https://github.com/xmrenigmax/ReadMeGenerator.git
+cd ReadMeGenerator
 npm install
+```
+
+### Usage
+After installation, run:
+```bash
+readme-generator-cli
 ```
 
 ## Version 1
