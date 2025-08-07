@@ -1,27 +1,47 @@
-# README Generator CLI 🛠️
+# 📜 README Generator CLI v2.0 🚀
 
-A simple command-line tool to automatically generate a basic `README.md` file for your projects. Designed to help developers kick-start documentation with minimal setup.
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
+[![npm Version](https://img.shields.io/npm/v/readme-generator-cli)](https://www.npmjs.com/package/readme-generator-cli)
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/xmrenigmax/ReadMeGenerator/blob/main/LICENSE)
+[![Downloads](https://img.shields.io/npm/dt/readme-generator-cli)](https://npm-stat.com/charts.html?package=readme-generator-cli)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/xmrenigmax/ReadMeGenerator/ci.yml?branch=main)](https://github.com/xmrenigmax/ReadMeGenerator/actions)
+[![Code Coverage](https://img.shields.io/codecov/c/github/xmrenigmax/ReadMeGenerator)](https://app.codecov.io/gh/xmrenigmax/ReadMeGenerator)
 
-## ✨ Features (v1)
+A powerful command-line tool to generate professional `README.md` files with smart defaults and customization options.
 
-- **📛 Title Generation**  
-  Automatically sets the project title based on the root directory name.
+## 🌟 Features
 
-- **📝 Basic Description**  
-  Inserts a placeholder section for project description.
+### 📊 Project Intelligence
+- Automatic title detection with directory name analysis
+- Multi-language detection with percentage breakdown
+- Dependency analysis for npm, pip, and gem projects
+- Git repository integration (remote origin detection)
+- License detection from common license files
 
-- **🧠 Language Detection**  
-  Detects main programming languages in the project and adds corresponding badges.
+### 🎨 Rich Formatting
+- Dynamic badges (version, downloads, license, CI status)
+- Automatic table of contents with anchor links
+- Code block support with syntax highlighting
+- Emoji support for visual appeal
+- Responsive layout optimized for GitHub
 
-- **📁 File Creation**  
-  Generates a `README.md` file in the root directory.
+### ⚙️ Configuration Options
+- Interactive mode with guided prompts
+- Config file support (.readmerc.json)
+- Template overrides for custom sections
+- Theming options (light/dark badge styles)
 
-- **🖥️ Cross-Platform Support**  
-  Works seamlessly across Windows, macOS, and Linux.
+## 🛠️ Tech Stack
 
-## 🚀 Tech Stack
+```mermaid
+pie
+    title Language Composition
+    "JavaScript" : 65
+    "TypeScript" : 25
+    "Other" : 10
+```
 
-This CLI tool is built using **Node.js**, ensuring speed, portability, and wide developer adoption.
+## Core Dependencies
 
 ### Dependencies
 
@@ -33,8 +53,17 @@ This CLI tool is built using **Node.js**, ensuring speed, portability, and wide 
 > _Note: `inquirer` and `simple-git` are planned for future versions to add interactive setup and Git detection._
 
 ## 📦 Installation
-
 ```bash
-git clone https://github.com/your-username/readme-generator-cli.git
-cd readme-generator-cli
+git clone https://github.com/xmrenigmax/readme-generator-cli.git
+cd readme-gen
 npm install
+```
+
+## Version 1
+```
+Prints Title
+Generated description (not customised yet)
+Features title
+installation title
+usage title
+```

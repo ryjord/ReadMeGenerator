@@ -11,7 +11,9 @@
   "description": "",
   "dependencies": {
     "chalk": "^5.5.0",
-    "language-detect": "^1.1.0"
+    "inquirer": "^12.9.0",
+    "language-detect": "^1.1.0",
+    "license-checker": "^25.0.1"
   },
   "bin": {
     "readme-gen": "./index.js"
