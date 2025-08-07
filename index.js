@@ -12,7 +12,11 @@ function getCurrentRepoUrl() {
   if (!fs.existsSync(gitConfigPath)) return null;
   const config = fs.readFileSync(gitConfigPath, 'utf-8');
   const match = config.match(/url\s*=\s*(.+)/);
-  return match ? match[1].trim() : null;
+  if (!match) return null;
+  // Normalize: remove protocol, trailing .git, and lowercase
+  let url = match[1].trim();
+  url = url.replace(/^git@|^https?:\/\//, '').replace(/\.git$/, '').toLowerCase();
+  return url;
 }
 
 // Template-based README section generator (no AI, free)
@@ -93,27 +97,68 @@ async function generateReadme(targetDir) {
     // Use AI to generate all sections
     const answers = await generateReadmeSectionsAI(targetDir);
 
+    // Try to get GitHub repo info for more badges/links
+    let repoUrl = getCurrentRepoUrl();
+    let githubBadges = [];
+    let githubLink = '';
+    if (repoUrl && repoUrl.includes('github.com')) {
+      // Extract user/repo
+      let repoPath = repoUrl.replace('github.com:', '').replace('github.com/', '');
+      githubLink = `https://github.com/${repoPath}`;
+      githubBadges = [
+        `![GitHub stars](https://img.shields.io/github/stars/${repoPath}?style=social)`,
+        `![GitHub forks](https://img.shields.io/github/forks/${repoPath}?style=social)`,
+        `![GitHub issues](https://img.shields.io/github/issues/${repoPath})`
+      ];
+    }
+
     const badges = [
       ...languages.map(lang => {
         const formattedLang = encodeURIComponent(lang.toLowerCase());
         return `![${lang}](https://img.shields.io/badge/lang-${formattedLang}-informational)`;
       }),
-      `![License](https://img.shields.io/badge/license-${encodeURIComponent(license)}-brightgreen)`
+      `![License](https://img.shields.io/badge/license-${encodeURIComponent(license)}-brightgreen)`,
+      ...githubBadges
     ];
 
     const featuresList = answers.features.split(',')
       .map(feat => `- ${feat.trim()}`)
       .join('\n');
 
+    // Table of Contents
+    const toc = [
+      '- [Description](#description)',
+      '- [Features](#features)',
+      '- [Getting Started](#getting-started)',
+      '- [Installation](#installation)',
+      '- [Usage](#usage)',
+      githubLink ? '- [Contributing](#contributing)' : null,
+      githubLink ? '- [Support](#support)' : null,
+      githubLink ? '- [Acknowledgements](#acknowledgements)' : null,
+      '- [License](#license)'
+    ].filter(Boolean).join('\n');
+
+    // Engaging intro
+    const intro = `Welcome to **${projectName}**! 🚀\n\n${githubLink ? `View on [GitHub](${githubLink})` : ''}`;
+
+    // Extended README content
     const readmeContent = `# ${projectName}
 
 ${badges.join(' ')}
+
+${intro}
+
+## Table of Contents
+${toc}
 
 ## Description
 ${answers.description}
 
 ## Features
 ${featuresList}
+
+## Getting Started
+Ready to dive in? Follow the instructions below to get your project up and running in no time!
 
 ## Installation
 \u0060\u0060\u0060bash
@@ -123,6 +168,9 @@ ${answers.installation}
 ## Usage
 ${answers.usage}
 
+${githubLink ? `## Contributing\nContributions, issues and feature requests are welcome!\nFeel free to check [issues page](${githubLink}/issues) or submit a pull request.\n` : ''}
+${githubLink ? `## Support\nIf you like this project, consider giving it a ⭐️ on [GitHub](${githubLink})!\n` : ''}
+${githubLink ? `## Acknowledgements\nThanks to all contributors and open source libraries that made this project possible.\n` : ''}
 ## License
 Distributed under the ${license} License. See LICENSE for more information.
 `;
@@ -169,7 +217,9 @@ async function main() {
       validate: input => input.startsWith('http') || input.startsWith('git@') ? true : 'Please enter a valid Git URL.'
     }
   ]);
-  if (repoUrl !== currentRepoUrl) {
+  // Normalize user input for comparison
+  let userUrl = repoUrl.trim().replace(/^git@|^https?:\/\//, '').replace(/\.git$/, '').toLowerCase();
+  if (userUrl !== currentRepoUrl) {
     console.error(chalk.red('That is not your current root. Try again with the correct repository URL.'));
     process.exit(1);
   }
