@@ -1,82 +1,80 @@
-# 📜 README Generator CLI v2.0 🚀
+# readme-gen
 
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
-[![npm Version](https://img.shields.io/npm/v/readme-generator-cli)](https://www.npmjs.com/package/readme-generator-cli)
-[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/xmrenigmax/ReadMeGenerator/blob/main/LICENSE)
-[![Downloads](https://img.shields.io/npm/dt/readme-generator-cli)](https://npm-stat.com/charts.html?package=readme-generator-cli)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/xmrenigmax/ReadMeGenerator/ci.yml?branch=main)](https://github.com/xmrenigmax/ReadMeGenerator/actions)
-[![Code Coverage](https://img.shields.io/codecov/c/github/xmrenigmax/ReadMeGenerator)](https://app.codecov.io/gh/xmrenigmax/ReadMeGenerator)
+A small command-line tool that writes a `README.md` for a Node project by reading its
+`package.json` and its git remote. Around 230 lines of JavaScript in a single file.
 
-A powerful command-line tool to generate professional `README.md` files with smart defaults and customization options.
+> **Archived / not maintained.** An early experiment, kept as a record of the work.
 
-## 🌟 Features
+## What it actually does
 
-### 📊 Project Intelligence
-- Automatic title detection with directory name analysis
-- Multi-language detection with percentage breakdown
-- Dependency analysis for npm, pip, and gem projects
-- Git repository integration (remote origin detection)
-- License detection from common license files
+Run it inside a git repository and it will:
 
-### 🎨 Rich Formatting
-- Dynamic badges (version, downloads, license, CI status)
-- Automatic table of contents with anchor links
-- Code block support with syntax highlighting
-- Emoji support for visual appeal
-- Responsive layout optimized for GitHub
+- Take the project title from the **directory name**
+- List file types in the top level of the project using `language-detect`
+- Read `package.json` and map a handful of known packages to feature bullets — it recognises
+  `express`, `react`, `vue`, `next`, `nestjs`, `mongoose`, `sequelize`, `socket.io`, `nodemon`
+  and `typescript`, and otherwise falls back to listing the dependency names
+- Pick a one-line description from `package.json`, or infer one from those same packages
+- Derive install and usage snippets from the `install`, `start` and `dev` scripts
+- Read the git remote from `.git/config` and, if it is a GitHub URL, add stars/forks/issues
+  badges and Contributing, Support and Acknowledgements sections
+- Write a fixed table of contents and a `README.md` into the current directory
 
-### ⚙️ Configuration Options
-- Interactive mode with guided prompts
-- Config file support (.readmerc.json)
-- Template overrides for custom sections
-- Theming options (light/dark badge styles)
+It asks you to type your repository URL and refuses to run if it does not match the remote it
+already found in `.git/config`.
 
-## 🛠️ Tech Stack
+## What it does not do
 
-```mermaid
-pie
-    title Language Composition
-    "JavaScript" : 65
-    "TypeScript" : 25
-    "Other" : 10
-```
+The previous version of this README claimed a number of things that were never implemented. For
+the record, there is **no** config file support (`.readmerc.json`), **no** template overrides,
+**no** badge theming, **no** language percentage breakdown, and **no** pip or gem support — the
+dependency analysis reads `package.json` only. There is one prompt, not a guided interactive mode.
 
-## Core Dependencies
+## Installation
 
-### Dependencies
+There is no published npm package. Clone and link it:
 
-| Package       | Purpose                            |
-|---------------|------------------------------------|
-| `chalk`       | For clean, colored terminal output |
-| `language-detect` | Detects project languages        |
-
-> _Note: `inquirer` and `simple-git` are planned for future versions to add interactive setup and Git detection._
-
-## 📦 Installation
-
-### Install via npm (recommended)
 ```bash
-npm install -g readme-generator-cli
-```
-
-### Or clone and run from source
-```bash
-git clone https://github.com/xmrenigmax/ReadMeGenerator.git
+git clone https://github.com/ryjord/ReadMeGenerator.git
 cd ReadMeGenerator
 npm install
+npm link
 ```
 
-### Usage
-After installation, run:
+Then, from inside any git repository:
+
 ```bash
-readme-generator-cli
+readme-gen
 ```
 
-## Version 1
+Or run it directly without linking:
+
+```bash
+node /path/to/ReadMeGenerator/index.js
 ```
-Prints Title
-Generated description (not customised yet)
-Features title
-installation title
-usage title
-```
+
+Requires Node 18 or newer (`inquirer` v12 sets that floor).
+
+**It overwrites `README.md` in the current directory without asking.** Run it on a clean working
+tree so you can undo it.
+
+## Known bugs and rough edges
+
+Documented rather than fixed, since the project is archived:
+
+- **The license badge is wrong.** It calls `license-checker` and takes
+  `Object.values(packages)[0]?.licenses` — the licence of whichever *dependency* comes back first,
+  not the project's own — and falls back to `MIT` on any error. A project with no licence at all
+  still gets an MIT badge.
+- **The title ignores `package.json`.** It uses the directory name, so a project checked out into a
+  differently-named folder gets the wrong title.
+- **The URL prompt is pointless.** It reads the remote from `.git/config`, then asks you to type the
+  same URL back and exits if they differ. It guards nothing.
+- Language detection only looks at the top level of the project, so it misses everything in `src/`.
+- The generated "Getting Started" and "Acknowledgements" sections are fixed boilerplate.
+- No tests.
+- `simple-git` and `uuid` were listed as dependencies but never imported; they have been removed.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
