@@ -4,4 +4,10 @@ dist/
 build/
 *.log
 *.tmp
-*.env
+.env
+.env.*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
