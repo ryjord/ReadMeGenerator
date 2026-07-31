@@ -139,7 +139,7 @@ async function generateReadme(targetDir) {
     ].filter(Boolean).join('\n');
 
     // Engaging intro
-    const intro = `Welcome to **${projectName}**! 🚀\n\n${githubLink ? `View on [GitHub](${githubLink})` : ''}`;
+    const intro = `Welcome to **${projectName}**!\n\n${githubLink ? `View on [GitHub](${githubLink})` : ''}`;
 
     // Extended README content
     const readmeContent = `# ${projectName}
@@ -169,7 +169,7 @@ ${answers.installation}
 ${answers.usage}
 
 ${githubLink ? `## Contributing\nContributions, issues and feature requests are welcome!\nFeel free to check [issues page](${githubLink}/issues) or submit a pull request.\n` : ''}
-${githubLink ? `## Support\nIf you like this project, consider giving it a ⭐️ on [GitHub](${githubLink})!\n` : ''}
+${githubLink ? `## Support\nIf you like this project, consider starring it on [GitHub](${githubLink})!\n` : ''}
 ${githubLink ? `## Acknowledgements\nThanks to all contributors and open source libraries that made this project possible.\n` : ''}
 ## License
 Distributed under the ${license} License. See LICENSE for more information.
