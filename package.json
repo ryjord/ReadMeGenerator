@@ -1,23 +1,29 @@
 {
-  "name": "generatorreadme",
+  "name": "readme-gen",
   "version": "1.0.0",
+  "description": "A small CLI that generates a README.md for a Node project by reading its package.json and git remote.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "readme-gen": "./index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "scripts": {
+    "check": "node --check index.js"
+  },
+  "keywords": [
+    "readme",
+    "cli",
+    "generator"
+  ],
+  "author": "Riley Jordan",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "chalk": "^5.5.0",
     "inquirer": "^12.9.0",
     "language-detect": "^1.1.0",
-    "license-checker": "^25.0.1",
-    "simple-git": "^3.28.0",
-    "uuid": "^11.1.0"
-  },
-  "bin": {
-    "readme-gen": "./index.js"
+    "license-checker": "^25.0.1"
   }
 }
