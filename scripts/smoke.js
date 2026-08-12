@@ -7,7 +7,7 @@ import path from 'node:path';
 
 import { runWizard } from '../src/wizard.js';
 
-const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'readme-gen-smoke-'));
+const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'suniemi-smoke-'));
 
 try {
   fs.writeFileSync(

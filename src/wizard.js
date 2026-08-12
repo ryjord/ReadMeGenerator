@@ -46,7 +46,7 @@ function previewLines(content, max = 14) {
 }
 
 export async function runWizard({ targetDir, assumeYes = false }) {
-  clack.intro(BRAND('readme-gen'));
+  clack.intro(BRAND('suniemi'));
 
   const scanSpin = clack.spinner();
   scanSpin.start('Scanning project');

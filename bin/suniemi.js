@@ -4,10 +4,10 @@ import path from 'node:path';
 
 import { runWizard } from '../src/wizard.js';
 
-const HELP = `readme-gen — generate a README.md for the current project
+const HELP = `suniemi — generate a README.md for the current project
 
 Usage
-  readme-gen [options]
+  suniemi [options]
 
 Options
   -y, --yes         Skip the wizard and write a README with detected defaults

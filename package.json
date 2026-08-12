@@ -1,14 +1,14 @@
 {
-  "name": "readme-gen",
+  "name": "suniemi",
   "version": "2.0.0",
   "description": "A stylish terminal wizard that generates a README.md by scanning your project - no AI, no network calls, no paid services.",
   "type": "module",
-  "main": "bin/readme-gen.js",
+  "main": "bin/suniemi.js",
   "bin": {
-    "readme-gen": "./bin/readme-gen.js"
+    "suniemi": "./bin/suniemi.js"
   },
   "scripts": {
-    "check": "node --check bin/readme-gen.js && node --check src/scan.js && node --check src/badges.js && node --check src/render.js && node --check src/wizard.js && node --check scripts/smoke.js",
+    "check": "node --check bin/suniemi.js && node --check src/scan.js && node --check src/badges.js && node --check src/render.js && node --check src/wizard.js && node --check scripts/smoke.js",
     "smoke": "node scripts/smoke.js"
   },
   "keywords": [

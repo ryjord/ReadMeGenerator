@@ -1,9 +1,9 @@
-# readme-gen
+# Suniemi
 
 A terminal wizard that writes a `README.md` for your project by scanning it — no AI, no API
 keys, no network calls, no paid services. Everything it knows comes from files already on disk.
 
-![readme-gen wizard](assets/wizard-demo.png)
+![Suniemi wizard](assets/wizard-demo.png)
 
 ## What it does
 
@@ -31,8 +31,8 @@ Run it inside any project directory and it will:
 There is no published npm package. Clone and link it:
 
 ```bash
-git clone https://github.com/ryjord/ReadMeGenerator.git
-cd ReadMeGenerator
+git clone https://github.com/ryjord/Suniemi.git
+cd Suniemi
 npm install
 npm link
 ```
@@ -40,13 +40,13 @@ npm link
 Then, from inside any project:
 
 ```bash
-readme-gen
+suniemi
 ```
 
 Or run it directly without linking:
 
 ```bash
-node /path/to/ReadMeGenerator/bin/readme-gen.js
+node /path/to/Suniemi/bin/suniemi.js
 ```
 
 Requires Node 18.3 or newer.
@@ -54,16 +54,16 @@ Requires Node 18.3 or newer.
 ## Usage
 
 ```bash
-readme-gen              # interactive wizard
-readme-gen --yes        # skip the wizard, write with detected defaults
-readme-gen --dir path   # target a different directory
-readme-gen --help
+suniemi              # interactive wizard
+suniemi --yes        # skip the wizard, write with detected defaults
+suniemi --dir path   # target a different directory
+suniemi --help
 ```
 
 ## What changed from v1
 
-The previous version was a single 230-line file with one pointless prompt (it read your git
-remote from `.git/config`, then made you type the same URL back and exited if they didn't
+Suniemi used to be `readme-gen`: a single 230-line file with one pointless prompt (it read your
+git remote from `.git/config`, then made you type the same URL back and exited if they didn't
 match — that guarded nothing) and several bugs that are now fixed:
 
 - The license badge used to come from `Object.values(packages)[0]?.licenses` — the license of
